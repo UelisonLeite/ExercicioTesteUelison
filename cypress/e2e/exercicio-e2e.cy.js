@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import produtosPage from "../support/page_objects/produtos.page";
+
 context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
   /*  Como cliente 
       Quero acessar a Loja EBAC 
@@ -10,12 +12,20 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
       E validando minha compra ao final */
 
   beforeEach(() => {
-      cy.visit('/')
+     cy.visit('produtos')
+
   });
 
   it('Deve fazer um pedido na loja Ebac Shop de ponta a ponta', () => {
-      //TODO: Coloque todo o fluxo de teste aqui, considerando as boas práticas e otimizações
       
+    let qtd = 4
+
+      produtosPage.buscarProduto("Abominable Hoodie")
+      produtosPage.addProdutoCarrinho('XS', 'Green', qtd)
+      cy.get('.woocommerce-message').should('contain', qtd + ' × “Abominable Hoodie” foram adicionados no seu carrinho.')
+      produtosPage.concluirCompra()
+      produtosPage.finalizarPedido()
+
   });
 
 
