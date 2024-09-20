@@ -26,9 +26,9 @@ class ProdutosPage{
          cy.get('.checkout-button').click()
          
     }
-    finalizarPedido(){
+    finalizarPedido(nome, sobrenome, rua, cidade, cep, telefone,email){
 
-         cy.checkout("Uelison", "Leite", "Rua da Neves", "Joao Pessoa", "58500-000", "83 996224596", "uelisonleite@gmail.com")
+         cy.checkout(nome, sobrenome, rua, cidade, cep, telefone,email)
          cy.get('#terms').click()
          cy.get('#place_order').click()
          cy.get('.woocommerce-notice').should('contain', "Obrigado. Seu pedido foi recebido.")
